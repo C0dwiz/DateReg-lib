@@ -9,7 +9,7 @@ Python библиотека для работы с [DateRegBot API](https://docs
 ## Установка
 
 ```bash
-pip install git+https://github.com/C0dwiz/DateReg-lib
+pip install git+https://github.com/C0dwiz/DateReg-lib/archive/main.zip --force-reinstall
 ```
 
 ## Быстрый старт
