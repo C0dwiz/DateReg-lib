@@ -55,7 +55,6 @@ class TTLCache:
             del self._cache[key]
             return None
 
-        # Перемещаем в конец (LRU)
         self._cache.move_to_end(key)
         return value
 

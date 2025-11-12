@@ -62,7 +62,6 @@ class DateRegAPI:
         self.use_models = use_models
         self.session = requests.Session()
 
-        # Настройка кеша
         if cache is not None:
             self.cache = cache
         else:
@@ -103,7 +102,6 @@ class DateRegAPI:
         """
         request_params = params.copy() if params else {}
 
-        # Проверяем кеш
         if use_cache:
             cache_key = make_cache_key(endpoint, request_params)
             cached_result = self.cache.get(cache_key)
@@ -120,7 +118,6 @@ class DateRegAPI:
             self._handle_response(response)
             result = response.json()
 
-            # Сохраняем в кеш
             if use_cache:
                 cache_key = make_cache_key(endpoint, params or {})
                 self.cache.set(cache_key, result)
@@ -148,15 +145,12 @@ class DateRegAPI:
         if status_code == 200:
             return
 
-        # Извлекаем детали ошибки
         try:
             error_data = response.json()
             detail = error_data.get("detail", "Unknown error")
         except (ValueError, requests.exceptions.JSONDecodeError):
             detail = response.text or "Unknown error"
 
-        # Используем match/case для Python 3.10+ (более читаемо)
-        # Для совместимости с 3.9 используем if/elif
         error_message_map: dict[int, tuple[type[DateRegAPIError], str]] = {
             400: (DateRegAPIError, "Ошибка в параметрах запроса"),
             401: (DateRegAuthenticationError, "Недействительный API-ключ"),
@@ -269,7 +263,6 @@ class DateRegAPI:
         if not username:
             raise ValueError("Username cannot be empty")
 
-        # Убираем @ если он есть
         username = username.lstrip("@")
 
         result = self._make_request(
@@ -307,7 +300,6 @@ class DateRegAPI:
         if not username:
             raise ValueError("Username cannot be empty")
 
-        # Убираем @ если он есть
         username = username.lstrip("@")
 
         result = self._make_request(

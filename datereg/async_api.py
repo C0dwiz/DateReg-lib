@@ -64,7 +64,6 @@ class AsyncDateRegAPI:
         self._session: aiohttp.ClientSession | None = None
         self._own_session = False
 
-        # Настройка кеша
         if cache is not None:
             self.cache = cache
         else:
@@ -122,7 +121,6 @@ class AsyncDateRegAPI:
         """
         request_params = params.copy() if params else {}
 
-        # Проверяем кеш
         if use_cache:
             cache_key = make_cache_key(endpoint, request_params)
             cached_result = self.cache.get(cache_key)
@@ -137,7 +135,6 @@ class AsyncDateRegAPI:
                 await self._handle_response(response)
                 result = await response.json()
 
-                # Сохраняем в кеш
                 if use_cache:
                     cache_key = make_cache_key(endpoint, params or {})
                     self.cache.set(cache_key, result)
@@ -163,14 +160,12 @@ class AsyncDateRegAPI:
         if status_code == 200:
             return
 
-        # Извлекаем детали ошибки
         try:
             error_data = await response.json()
             detail = error_data.get("detail", "Unknown error")
         except (ValueError, aiohttp.ContentTypeError):
             detail = await response.text() or "Unknown error"
 
-        # Маппинг статус-кодов на исключения
         error_message_map: dict[int, tuple[type[DateRegAPIError], str]] = {
             400: (DateRegAPIError, "Ошибка в параметрах запроса"),
             401: (DateRegAuthenticationError, "Недействительный API-ключ"),
@@ -283,7 +278,6 @@ class AsyncDateRegAPI:
         if not username:
             raise ValueError("Username cannot be empty")
 
-        # Убираем @ если он есть
         username = username.lstrip("@")
 
         result = await self._make_request(
@@ -321,7 +315,6 @@ class AsyncDateRegAPI:
         if not username:
             raise ValueError("Username cannot be empty")
 
-        # Убираем @ если он есть
         username = username.lstrip("@")
 
         result = await self._make_request(
