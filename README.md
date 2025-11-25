@@ -1,6 +1,6 @@
 # DateReg API Library
 
-Python библиотека для работы с [DateRegBot API](https://docs.goy.guru/api) - получение даты регистрации аккаунтов Telegram, ID пользователей по их имени и другие данные.
+Python библиотека для работы с [DateRegBot API](https://docs.datereg.pro/api) - получение даты регистрации аккаунтов Telegram, ID пользователей по их имени и другие данные.
 
 ## Требования
 
@@ -179,7 +179,7 @@ except DateRegAPIError as e:
 ```python
 api = DateRegAPI(
     token="YOUR_API_TOKEN",
-    base_url="https://api.goy.guru/api/v1",  # По умолчанию
+    base_url="https://api.datereg.pro/api/v1",  # По умолчанию
     timeout=30  # Таймаут запросов в секундах
 )
 ```
@@ -217,7 +217,7 @@ api.resolve_username(username="")
 
 Если у вас возникли вопросы или проблемы:
 
-- 📖 [Документация API](https://docs.goy.guru/api)
-- 💬 Telegram: [@gitapps](https://t.me/gitapps)
+- 📖 [Документация API](https://docs.datereg.pro/api)
+- 💬 Telegram: [@gitapps](https://t.me/gitapps) && [@liteapi](https://t.me/liteapi)
 - 🤖 Бот: [@dateregbot](https://t.me/dateregbot)
 

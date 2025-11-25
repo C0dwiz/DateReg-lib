@@ -34,7 +34,7 @@ class AsyncDateRegAPI:
 
     Args:
         token: API-ключ для аутентификации
-        base_url: Базовый URL API (по умолчанию: https://api.goy.guru/api/v1)
+        base_url: Базовый URL API (по умолчанию: https://api.datereg.pro/api/v1)
         timeout: Таймаут запросов в секундах (по умолчанию: 30)
         cache: Экземпляр TTLCache для кеширования. Если None, кеширование отключено.
         cache_ttl: Время жизни кеша в секундах (по умолчанию: 3600)
@@ -42,7 +42,7 @@ class AsyncDateRegAPI:
         use_models: Использовать dataclass модели вместо словарей (по умолчанию: True)
     """
 
-    BASE_URL = "https://api.goy.guru/api/v1"
+    BASE_URL = "https://api.datereg.pro/api/v1"
 
     def __init__(
         self,
